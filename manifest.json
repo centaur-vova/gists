@@ -1,17 +1,18 @@
 {
     "manifest_version": 3,
-    "name": "Hide ok.ru top menu",
+    "name": "Hide friends",
     "version": "1.0",
+    "description": "🚫 Скрывает блок с друзьями на страницах профиля.",
     "content_scripts": [
         {
             "matches": [
-                "*://ok.ru/*"
+                "*://ok.ru/*",
+                "*://vk.ru/*"
             ],
             "js": [
                 "inject.js"
             ],
-            "run_at": "document_end",
-            "all_frames": false
+            "run_at": "document_idle"
         }
     ]
 }
