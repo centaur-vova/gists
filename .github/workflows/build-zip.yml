@@ -25,9 +25,9 @@ jobs:
           mv !("${{ github.event.repository.name }}") ${{ github.event.repository.name }}/
           zip -r ${{ github.event.repository.name }}-${{ github.ref_name }}.zip ${{ github.event.repository.name }}/
 
-      # Загружаем артефакт в GitHub Actions (используем v4!)
+      # Загружаем артефакт в GitHub Actions
       - name: Upload artifact to GitHub Actions
-        uses: actions/upload-artifact@v4 ⚡️
+        uses: actions/upload-artifact@v4 # Вот здесь убрал ⚡️!
         with:
           name: Extension-ZIP
           path: ${{ github.event.repository.name }}-${{ github.ref_name }}.zip
