@@ -7,27 +7,20 @@ on:
 
 jobs:
   build-and-upload:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24 # Используем стабильную версию ОС
 
     steps:
-      - name: Checkout code
+      - name: Checkout code 📋
         uses: actions/checkout@v4
 
-      # Удаляем файлы из .distignore
-      - name: Remove files from .distignore
-        run: |
-          xargs -a .distignore rm -rf || true
-
-      # Создаём архив
-      - name: Create ZIP archive
-        run: |
-          mkdir -p ${{ github.event.repository.name }}
-          mv !("${{ github.event.repository.name }}") ${{ github.event.repository.name }}/
-          zip -r ${{ github.event.repository.name }}-${{ github.ref_name }}.zip ${{ github.event.repository.name }}/
-
-      # Загружаем артефакт в GitHub Actions
-      - name: Upload artifact to GitHub Actions
-        uses: actions/upload-artifact@v4 # Вот здесь убрал ⚡️!
+      # ⚠️ Важный шаг! Устанавливаем Node.js 24.
+      # Это действие нужно для корректной работы checkout@v4.
+      - name: Setup Node.js ✅
+        uses: actions/setup-node@v4
         with:
-          name: Extension-ZIP
-          path: ${{ github.event.repository.name }}-${{ github.ref_name }}.zip
+          node-version: '24'
+
+      # Удаляем файлы из .distignore (без сложных конструкций!)
+      - name: Remove files from .distignore 🗑️
+        run: |
+          find . -type f | grep -Fxvf <(cat .
