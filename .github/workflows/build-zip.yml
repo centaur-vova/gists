@@ -1,10 +1,9 @@
 name: Build and Upload ZIP
 
 on:
-  # Триггер на каждый пуш в main (или master)
   push:
     branches:
-      - main # Замени на твою основную ветку, если она называется иначе
+      - main # Замени на свою ветку (например, master)
 
 jobs:
   build-and-upload:
@@ -14,18 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Удаляем файлы из .distignore
       - name: Remove files from .distignore
         run: |
           xargs -a .distignore rm -rf || true
 
+      # Создаём архив
       - name: Create ZIP archive
         run: |
           mkdir -p ${{ github.event.repository.name }}
-          mv !("${{ github.event.repository.name }}") ${{ github.event.repository.name }}/ # Перемещаем все нужные файлы в папку с именем проекта
+          mv !("${{ github.event.repository.name }}") ${{ github.event.repository.name }}/
           zip -r ${{ github.event.repository.name }}-${{ github.ref_name }}.zip ${{ github.event.repository.name }}/
 
+      # Загружаем артефакт в GitHub Actions (используем v4!)
       - name: Upload artifact to GitHub Actions
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 ⚡️
         with:
           name: Extension-ZIP
           path: ${{ github.event.repository.name }}-${{ github.ref_name }}.zip
