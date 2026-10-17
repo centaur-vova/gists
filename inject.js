@@ -16,7 +16,7 @@
       break;
     case "vk.ru":
       selector =
-        'section[data-testid="profile-friends-block"], [data-testid*="friends-header"]'; // Селекторы для VK.com
+        'section[data-testid="profile-friends-block"], [data-testid*="friends-header"], [data-testid="desktop-header-button-counter"]';
       break;
     default:
       console.log("Неизвестный сайт");
