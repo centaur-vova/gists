@@ -3,9 +3,9 @@
 
   // Функция скрытия элементов по выбранному селектору
   function hideElements(selector) {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    el.style.display = "none";
+    document
+      .querySelectorAll(selector)
+      .forEach((el) => (el.style.display = "none"));
   }
 
   // Определяем сайт и выбираем соответствующий селектор
@@ -16,7 +16,7 @@
       break;
     case "vk.ru":
       selector =
-        'section[data-testid="profile-friends-block"], [data-testid*="friends-header"], [data-testid="desktop-header-button-counter"]';
+        '[data-testid="profile-narrow-column"], #ads_wrapper, #page_header_cont';
       break;
     default:
       console.log("Неизвестный сайт");
