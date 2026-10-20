@@ -11,9 +11,11 @@
   // Определяем сайт и выбираем соответствующий селектор
   let selector;
   switch (location.hostname) {
+    /*
     case "ok.ru":
       selector = '[aria-label="Верхнее меню"]'; // Селектор для OK.ru
       break;
+    */
     case "vk.ru":
       selector =
         '[data-testid="profile-narrow-column"], #ads_wrapper, #page_header_cont';
